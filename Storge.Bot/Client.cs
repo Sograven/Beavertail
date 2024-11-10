@@ -47,6 +47,6 @@ public static class Client
     static Client()
     {
         Cts = new CancellationTokenSource();
-        Bot = new TelegramBotClient("<Token>", cancellationToken: Cts.Token);
+        Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
     }
 }
