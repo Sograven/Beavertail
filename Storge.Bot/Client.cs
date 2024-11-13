@@ -10,15 +10,10 @@ public static class Client
     private static readonly CancellationTokenSource Cts = new CancellationTokenSource();
     private static readonly TelegramBotClient Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
     
-    public static async Task Main()
-    {
-        await StartHandlingAsync();
-    }
-
-    private static async Task StartHandlingAsync()
+    public static async Task StartHandlingAsync()
     {
         var me = await Bot.GetMe();
-        Console.WriteLine(me.FirstName);
+        Console.WriteLine($"Start listening for {me.FirstName}.");
         
         Bot.OnUpdate += OnUpdate;
         Bot.OnMessage += OnMessage;
@@ -30,7 +25,22 @@ public static class Client
     
     private static async Task OnUpdate(Update update)
     {
+        if (update.Type is UpdateType.CallbackQuery)
+        {
+            await OnQuery(update.CallbackQuery!);
+            await Bot.AnswerCallbackQuery(update.CallbackQuery!.Id); // не забыть
+        }
+    }
+
+    private static async Task OnQuery(CallbackQuery callbackQuery)
+    {
+        var response = callbackQuery.Data switch
+        {
+            "command_list" => Commands.StartAsync(Bot, callbackQuery.Message!),
+            _ => Commands.UnknownAsync(Bot, callbackQuery.Message!)
+        };
         
+        Console.WriteLine(response);
     }
     
     private static async Task OnMessage(Message message, UpdateType updateType)

@@ -4,6 +4,7 @@ public static class Config
 {
     public static string Token
     {
+        // Переписать
         get
         {
             if (Environment.GetEnvironmentVariable("STORGEBOT_TOKEN") is not null)
