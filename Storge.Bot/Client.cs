@@ -48,6 +48,7 @@ public static class Client
         var response = message.Text switch
         {
             "/start" => await Commands.StartAsync(Bot, message),
+            "/list" => await Commands.ListAsync(Bot, message),
             _ => await Commands.UnknownAsync(Bot, message)
         };
         
