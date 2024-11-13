@@ -7,15 +7,15 @@ namespace Storge.Bot;
 
 public static class Client
 {
-    private static readonly CancellationTokenSource Cts;
-    private static readonly TelegramBotClient Bot;
+    private static readonly CancellationTokenSource Cts = new CancellationTokenSource();
+    private static readonly TelegramBotClient Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
     
     public static async Task Main()
     {
-        await StartHandling();
+        await StartHandlingAsync();
     }
 
-    private static async Task StartHandling()
+    private static async Task StartHandlingAsync()
     {
         var me = await Bot.GetMe();
         Console.WriteLine(me.FirstName);
@@ -35,18 +35,17 @@ public static class Client
     
     private static async Task OnMessage(Message message, UpdateType updateType)
     {
-        if (message.Text == "/start")
-            await Bot.SendMessage(message.Chat, $"Hi, {message.From!.FirstName}!");
+        var response = message.Text switch
+        {
+            "/start" => await Commands.StartAsync(Bot, message),
+            _ => await Commands.UnknownAsync(Bot, message)
+        };
+        
+        Console.WriteLine(response);
     }
 
     private static async Task OnError(Exception exception, HandleErrorSource source)
     {
         Console.WriteLine(exception);
-    }
-
-    static Client()
-    {
-        Cts = new CancellationTokenSource();
-        Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
     }
 }
