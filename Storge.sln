@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storge.Bot", "Storge.Bot\Storge.Bot.csproj", "{0EB41C54-1467-4E1F-833C-346899861B1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storge.Runner", "Storge.Runner\Storge.Runner.csproj", "{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0EB41C54-1467-4E1F-833C-346899861B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EB41C54-1467-4E1F-833C-346899861B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EB41C54-1467-4E1F-833C-346899861B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
