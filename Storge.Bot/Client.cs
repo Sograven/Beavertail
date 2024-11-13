@@ -25,17 +25,19 @@ public static class Client
     
     private static async Task OnUpdate(Update update)
     {
-        var type = update.Type;
-        if (type is UpdateType.CallbackQuery)
-            await OnCallbackQuery(update.CallbackQuery!);
+        if (update.Type is UpdateType.CallbackQuery)
+        {
+            await OnQuery(update.CallbackQuery!);
+            await Bot.AnswerCallbackQuery(update.CallbackQuery!.Id); // не забыть
+        }
     }
 
-    private static async Task OnCallbackQuery(CallbackQuery callbackQuery)
+    private static async Task OnQuery(CallbackQuery callbackQuery)
     {
         var response = callbackQuery.Data switch
         {
-            "command_list" => await Commands.StartAsync(Bot, callbackQuery.Message!),
-            _ => await Commands.UnknownAsync(Bot, callbackQuery.Message!)
+            "command_list" => Commands.StartAsync(Bot, callbackQuery.Message!),
+            _ => Commands.UnknownAsync(Bot, callbackQuery.Message!)
         };
         
         Console.WriteLine(response);
