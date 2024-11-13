@@ -36,7 +36,7 @@ public static class Client
     {
         var response = callbackQuery.Data switch
         {
-            "command_list" => Commands.StartAsync(Bot, callbackQuery.Message!),
+            "command_list" => Commands.ListAsync(Bot, callbackQuery.Message!),
             _ => Commands.UnknownAsync(Bot, callbackQuery.Message!)
         };
         
@@ -48,6 +48,7 @@ public static class Client
         var response = message.Text switch
         {
             "/start" => await Commands.StartAsync(Bot, message),
+            "/list" => await Commands.ListAsync(Bot, message),
             _ => await Commands.UnknownAsync(Bot, message)
         };
         
