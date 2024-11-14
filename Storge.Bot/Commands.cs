@@ -21,6 +21,12 @@ public static class Commands
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
 
+    public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
+    {
+        await bot.SendMessage(message.Chat, text: "Список команд: \n/start - начинает работу бота. \n/list - показывает список команд бота.");
+        return $"Response to message {message.Text} from {message.Chat.Id}";
+    }
+
     public static async Task<string> UnknownAsync(TelegramBotClient bot, Message message)
     {
         await bot.SendMessage(message.Chat.Id, "Упс! Кажется, что-то пошло не так.\n" +
