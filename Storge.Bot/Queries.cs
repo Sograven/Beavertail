@@ -18,7 +18,7 @@ public static class Queries
         
         return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
     }
-
+  
     /// <summary>
     /// Output a message on user's request about not working function and refer to admin
     /// </summary>
