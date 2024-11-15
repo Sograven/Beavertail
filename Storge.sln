@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storge.Bot", "Storge.Bot\St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storge.Runner", "Storge.Runner\Storge.Runner.csproj", "{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storge.Core", "Storge.Core\Storge.Core.csproj", "{1736DF88-6E18-4FF4-BBC8-79AC570C7246}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61FC9C0-1BB3-46FE-B490-58936AA8B3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1736DF88-6E18-4FF4-BBC8-79AC570C7246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1736DF88-6E18-4FF4-BBC8-79AC570C7246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1736DF88-6E18-4FF4-BBC8-79AC570C7246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1736DF88-6E18-4FF4-BBC8-79AC570C7246}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

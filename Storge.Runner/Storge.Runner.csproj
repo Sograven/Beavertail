@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Storge.Bot\Storge.Bot.csproj" />
+      <ProjectReference Include="..\Storge.Core\Storge.Core.csproj" />
     </ItemGroup>
 
 </Project>
