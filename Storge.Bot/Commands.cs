@@ -32,6 +32,7 @@ public static class Commands
         await bot.SendMessage(message.Chat, text: "Список команд: \n/start - начинает работу бота. \n/list - показывает список команд бота.");
         return $"Response to command {message.Text} from {message.Chat.Id}";
     }
+
     /// <summary>
     /// Output a message with command list
     /// </summary>
