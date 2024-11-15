@@ -34,10 +34,9 @@ public static class Client
     private static async Task OnUpdate(Update update)
     {
         if (update.Type is UpdateType.CallbackQuery)
-        {
             await OnQuery(update.CallbackQuery!);
-            await Bot.AnswerCallbackQuery(update.CallbackQuery!.Id); // не забыть
-        }
+        else
+            Console.WriteLine($"Unknown update type {update.Type}");
     }
 
     /// <summary>
@@ -49,8 +48,8 @@ public static class Client
     {
         var response = callbackQuery.Data switch
         {
-            "command_list" => Commands.ListAsync(Bot, callbackQuery.Message!),
-            _ => Commands.UnknownAsync(Bot, callbackQuery.Message!)
+            "command_list" => await Queries.CommandListAsync(Bot, callbackQuery),
+            _ => await Queries.UnknownQueryAsync(Bot, callbackQuery)
         };
         
         Console.WriteLine(response);
