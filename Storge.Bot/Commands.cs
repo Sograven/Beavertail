@@ -6,6 +6,12 @@ namespace Storge.Bot;
 
 public static class Commands
 {
+    /// <summary>
+    /// Output and entry message with inline buttons when programm is starting (or user give an input message "/start")
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains message/command from user (in this method message should be "/start")</param>
+    /// <returns></returns>
     public static async Task<string> StartAsync(TelegramBotClient bot, Message message)
     {
         var buttons = new InlineKeyboardMarkup(
@@ -20,13 +26,25 @@ public static class Commands
 
         return $"Response to command {message.Text} from {message.Chat.Id}";
     }
-
+  
+    /// <summary>
+    /// Output a message with command list
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains message/command from user (in this method message should be "/list")</param>
+    /// <returns></returns>
     public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
     {
-        await bot.SendMessage(message.Chat, text: "Список команд: \n/start - начинает работу бота. \n/list - показывает список команд бота.");
-        return $"Response to command {message.Text} from {message.Chat.Id}";
+        await bot.SendMessage(message.Chat, text: "Список команд: \n/start - начинает работу бота \n/list - показывает список команд бота.");
+        return $"Response to message {message.Text} from {message.Chat.Id}";
     }
 
+    /// <summary>
+    /// Output the message with request to try again because user input an unknown message/command for programm
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains message/command from user which program cannot to define</param>
+    /// <returns></returns>
     public static async Task<string> UnknownAsync(TelegramBotClient bot, Message message)
     {
         await bot.SendMessage(message.Chat.Id, "Упс! Кажется, что-то пошло не так.\n" +
