@@ -7,8 +7,16 @@ namespace Storge.Bot;
 
 public static class Client
 {
+    /// <summary>
+    /// Variable contains a token of program cancellation
+    /// </summary>
     private static readonly CancellationTokenSource Cts = new CancellationTokenSource();
+
+    /// <summary>
+    /// Variable contains a client for using the Telegram Bot API with parameters: token, cancellationToken
+    /// </summary>
     private static readonly TelegramBotClient Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
+    
     /// <summary>
     /// Entry point for the program
     /// </summary>
@@ -49,6 +57,7 @@ public static class Client
         var response = callbackQuery.Data switch
         {
             "command_list" => await Queries.CommandListAsync(Bot, callbackQuery),
+            "command_faq" => await Queries.CommandFaqAsync(Bot, callbackQuery),
             _ => await Queries.UnknownQueryAsync(Bot, callbackQuery)
         };
         
@@ -67,6 +76,7 @@ public static class Client
         {
             "/start" => await Commands.StartAsync(Bot, message),
             "/list" => await Commands.ListAsync(Bot, message),
+            "/faq" => await Commands.FaqAsync(Bot, message),
             _ => await Commands.UnknownAsync(Bot, message)
         };
         
