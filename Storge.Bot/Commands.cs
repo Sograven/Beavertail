@@ -6,6 +6,12 @@ namespace Storge.Bot;
 
 public static class Commands
 {
+    /// <summary>
+    /// Output and entry message with inline buttons when programm is starting (or user give an input message "/start")
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
     public static async Task<string> StartAsync(TelegramBotClient bot, Message message)
     {
         var buttons = new InlineKeyboardMarkup(
