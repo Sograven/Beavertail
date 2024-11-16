@@ -36,10 +36,12 @@ public static class Commands
     /// <returns>Return an operation log to console</returns>
     public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
     {
-        await bot.SendMessage(message.Chat, text: "Список команд:\n" + 
+        var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_start" });
+
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Список команд:\n" + 
             "/start - начинает работу бота\n" +
             "/list - показывает список команд бота\n" +
-            "/faq - выводит раздел \"Часто задаваемые вопросы\" ");
+            "/faq - выводит раздел c категориями часто задаваемых вопросов ");
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
@@ -52,14 +54,57 @@ public static class Commands
     /// <returns>Return an operation log to console</returns>
     public static async Task<string> FaqAsync(TelegramBotClient bot, Message message)
     {
-        await bot.SendMessage(message.Chat, text: "Часто задаваемые вопросы:\n\n" +
-            "Q: Как узнать **статус заказа?** \n" +
-            "A: **Статус заказа** можно узнать через наш удобный бот-сервис. \n\n" +
+        var faq_buttons = new InlineKeyboardMarkup()
+            .AddButton("Оплата заказа","command_payment")
+            .AddNewRow()
+            .AddButton("Доставка","command_delivery")
+            .AddNewRow()
+            .AddButton("Контакты и график работы", "command_contacts")
+            .AddNewRow()
+            .AddButton("Назад", "command_start");
+
+        await bot.SendMessage(message.Chat, replyMarkup: faq_buttons, text: "Часто задаваемые вопросы\n\n" +
+            "Выберите категорию:");
+
+        return $"Response to message {message.Text} from {message.Chat.Id}";
+    }
+
+    public static async Task<string> PaymentFaqAsync(TelegramBotClient bot, Message message)
+    {
+        var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
+       
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Как оплатить заказ? \n" +
+            "A: Заказ можно оплатить через банковские карты Visa, Mastercard и МИР, а также с помощью СБП. \n\n" +
             "Q: Как оформить заказ? \n" +
-            "A: Заказ оформляете через сайт компании с помощью встроенного поиска и интуитивно понятного графического интерфейса. \n\n " +
+            "A: Заказ оформляется через сайт компании с помощью встроенного поиска и интуитивно понятного графического интерфейса. \n\n" +
             "Q: Как отменить заказ? \n" +
-            "A: Заказ можно отменить в течение 24 часов после оформления заказа. Для этого напишите в чат поддержки с помощью нашего умного бота.",
-            ParseMode.Markdown);
+            "A: Заказ можно отменить в течение 24 часов после оформления заказа. Для этого напишите в чат поддержки с помощью нашего умного бота.");
+
+        return $"Response to message {message.Text} from {message.Chat.Id}";
+    }
+
+    public static async Task<string> DeliveryFaqAsync(TelegramBotClient bot, Message message)
+    {
+        var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
+
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Какие пункты выдачи доступны для получения заказа? \n" +
+            "A: Мы отправляем покупателям товары с помощью сервисов: СДЭК, Boxberry и почта России. \n\n" +
+            "Q: Сколько по времени осуществляется доставка? \n" +
+            "A: Средняя время доставки по России: 7-21 день в зависимости от указанного адреса доставки и выбранного сервиса. \n\n" +
+            "Q: Как узнать статус заказа? \n" +
+            "A: Статус заказа можно узнать через наш удобный бот-сервис. \n\n");
+
+        return $"Response to message {message.Text} from {message.Chat.Id}";
+    }
+
+    public static async Task<string> ContactsFaqAsync(TelegramBotClient bot, Message message)
+    {
+        var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
+
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Каков ваш примерный график работы? \n" +
+            "A: Мы работаем все дни недели круглосуточно. \n\n" +
+            "Q: Адрес вашей компании? \n" +
+            "A: Адрес: хуево-кукуево, дом 15, квартира \"Вас ебать не должно\" \n\n");
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }

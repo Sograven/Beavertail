@@ -5,6 +5,14 @@ namespace Storge.Bot;
 
 public static class Queries
 {
+    public static async Task<string> CommandStartAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
+    {
+        await Commands.StartAsync(bot, callbackQuery.Message!);
+        await bot.AnswerCallbackQuery(callbackQuery.Id);
+
+        return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
+    }
+
     /// <summary>
     /// Output a command list on user's request
     /// </summary>
@@ -28,6 +36,30 @@ public static class Queries
     public static async Task<string> CommandFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
     {
         await Commands.FaqAsync(bot, callbackQuery.Message!);
+        await bot.AnswerCallbackQuery(callbackQuery.Id);
+
+        return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
+    }
+
+    public static async Task<string> CommandPaymentFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
+    {
+        await Commands.PaymentFaqAsync(bot, callbackQuery.Message!);
+        await bot.AnswerCallbackQuery(callbackQuery.Id);
+
+        return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
+    }
+
+    public static async Task<string> CommandDeliveryFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
+    {
+        await Commands.DeliveryFaqAsync(bot, callbackQuery.Message!);
+        await bot.AnswerCallbackQuery(callbackQuery.Id);
+
+        return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
+    }
+
+    public static async Task<string> CommandContactsFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
+    {
+        await Commands.ContactsFaqAsync(bot, callbackQuery.Message!);
         await bot.AnswerCallbackQuery(callbackQuery.Id);
 
         return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";

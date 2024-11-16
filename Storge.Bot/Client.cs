@@ -56,8 +56,12 @@ public static class Client
     {
         var response = callbackQuery.Data switch
         {
+            "command_start" => await Queries.CommandStartAsync(Bot, callbackQuery),
             "command_list" => await Queries.CommandListAsync(Bot, callbackQuery),
             "command_faq" => await Queries.CommandFaqAsync(Bot, callbackQuery),
+            "command_payment" => await Queries.CommandPaymentFaqAsync(Bot, callbackQuery),
+            "command_delivery" => await Queries.CommandDeliveryFaqAsync(Bot, callbackQuery),
+            "command_contacts" => await Queries.CommandContactsFaqAsync(Bot, callbackQuery),
             _ => await Queries.UnknownQueryAsync(Bot, callbackQuery)
         };
         
