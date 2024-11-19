@@ -20,10 +20,22 @@ public static class Commands
             new InlineKeyboardButton { Text = "Часто задаваемые вопросы", CallbackData = "command_faq" },
             new InlineKeyboardButton { Text = "Оформить заказ", CallbackData = "command_order" });
         
-        await bot.SendMessage(message.Chat, replyMarkup: buttons, text: "Привет! На связи магазин Storge.\n" +
+        if (message.Text == "/start")
+        {
+            await bot.SendMessage(message.Chat, replyMarkup: buttons, text: "Привет! На связи магазин Storge.\n" +
                                                                           "С помощью этого бота ты можешь оформить заказ и узнать его статус.\n" +
                                                                           "Список команд и их описание можешь узнать с помощью команды /list,\n" +
                                                                           "либо воспользоваться кнопками под этим сообщением.");
+        }
+        else 
+        {
+            await bot.EditMessageText(message.Chat, message.Id, replyMarkup: buttons, text: "Привет! На связи магазин Storge.\n" +
+                                                                              "С помощью этого бота ты можешь оформить заказ и узнать его статус.\n" +
+                                                                              "Список команд и их описание можешь узнать с помощью команды /list,\n" +
+                                                                              "либо воспользоваться кнопками под этим сообщением.");
+        }
+
+        
 
         return $"Response to command {message.Text} from {message.Chat.Id}";
     }
@@ -37,11 +49,20 @@ public static class Commands
     public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_start" });
-
-        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Список команд:\n" + 
+        if (message.Text == "/list")
+        {
+            await bot.SendMessage(message.Chat, replyMarkup: button, text: "Список команд:\n" +
             "/start - начинает работу бота\n" +
             "/list - показывает список команд бота\n" +
             "/faq - выводит раздел c категориями часто задаваемых вопросов ");
+        }
+        else
+        {
+            await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Список команд:\n" +
+            "/start - начинает работу бота\n" +
+            "/list - показывает список команд бота\n" +
+            "/faq - выводит раздел c категориями часто задаваемых вопросов ");
+        }
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
@@ -63,8 +84,17 @@ public static class Commands
             .AddNewRow()
             .AddButton("Назад", "command_start");
 
-        await bot.SendMessage(message.Chat, replyMarkup: faq_buttons, text: "Часто задаваемые вопросы\n\n" +
-            "Выберите категорию:");
+        if (message.Text == "/faq")
+        {
+            await bot.SendMessage(message.Chat, replyMarkup: faq_buttons, text: "Часто задаваемые вопросы\n\n" +
+                "Выберите категорию:");
+        }
+        else
+        {
+            await bot.EditMessageText(message.Chat, message.Id, replyMarkup: faq_buttons, text: "Часто задаваемые вопросы\n\n" +
+                "Выберите категорию:");
+        }
+
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
@@ -73,7 +103,7 @@ public static class Commands
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
        
-        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Как оплатить заказ? \n" +
+        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Q: Как оплатить заказ? \n" +
             "A: Заказ можно оплатить через банковские карты Visa, Mastercard и МИР, а также с помощью СБП. \n\n" +
             "Q: Как оформить заказ? \n" +
             "A: Заказ оформляется через сайт компании с помощью встроенного поиска и интуитивно понятного графического интерфейса. \n\n" +
@@ -87,7 +117,7 @@ public static class Commands
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
 
-        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Какие пункты выдачи доступны для получения заказа? \n" +
+        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Q: Какие пункты выдачи доступны для получения заказа? \n" +
             "A: Мы отправляем покупателям товары с помощью сервисов: СДЭК, Boxberry и почта России. \n\n" +
             "Q: Сколько по времени осуществляется доставка? \n" +
             "A: Средняя время доставки по России: 7-21 день в зависимости от указанного адреса доставки и выбранного сервиса. \n\n" +
@@ -101,7 +131,7 @@ public static class Commands
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
 
-        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Каков ваш примерный график работы? \n" +
+        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Q: Каков ваш примерный график работы? \n" +
             "A: Мы работаем все дни недели круглосуточно. \n\n" +
             "Q: Адрес вашей компании? \n" +
             "A: Адрес: хуево-кукуево, дом 15, квартира \"Вас ебать не должно\" \n\n");
