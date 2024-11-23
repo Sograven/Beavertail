@@ -7,6 +7,12 @@ namespace Storge.Bot;
 
 public static class Commands
 {
+    /// <summary>
+    /// Output and entry message with inline buttons when programm is starting for the first time (obligatory procedure for user)
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/start")</param>
+    /// <returns>Return a message.Id (Integer)</returns>
     public static async Task<int> FirstStartAsync(TelegramBotClient bot, Message message)
     {
         var buttons = new InlineKeyboardMarkup(
@@ -26,6 +32,12 @@ public static class Commands
         return message.Id;
     }
 
+    /// <summary>
+    /// Output and entry message with inline buttons when programm is starting (or user give an input message "/start")
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/start")</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> StartAsync(TelegramBotClient bot, Message message)
     {
         var buttons = new InlineKeyboardMarkup(
@@ -46,13 +58,14 @@ public static class Commands
     }
 
 
-        /// <summary>
-        /// Output and entry message with inline buttons when programm is starting (or user give an input message "/start")
-        /// </summary>
-        /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
-        /// <param name="message">Variable contains message/command from user (in this method message should be "/start")</param>
-        /// <returns>Return an operation log to console</returns>
-        public static async Task<string> StartAsync(TelegramBotClient bot, Message message, int message_id)
+    /// <summary>
+    /// Output and entry message with inline buttons when programm is starting (or user give an input message "/start")
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/start")</param>
+    /// <param name="message_id">Variable contains a message_id of bot's first message </param>
+    /// <returns>Return an operation log to console</returns>
+    public static async Task<string> StartAsync(TelegramBotClient bot, Message message, int message_id)
     {
         var buttons = new InlineKeyboardMarkup(
             new InlineKeyboardButton { Text = "Список команд", CallbackData = "command_list" },
@@ -74,7 +87,13 @@ public static class Commands
 
     }
 
-        public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
+    /// <summary>
+    /// Output a message with command list
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/list")</param>
+    /// <returns>Return an operation log to console</returns>
+    public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
         {
             var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_start" });
 
@@ -89,13 +108,14 @@ public static class Commands
     
         }
 
-        /// <summary>
-        /// Output a message with command list
-        /// </summary>
-        /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
-        /// <param name="message">Variable contains message/command from user (in this method message should be "/list")</param>
-        /// <returns>Return an operation log to console</returns>
-        public static async Task<string> ListAsync(TelegramBotClient bot, Message message, int message_id)
+    /// <summary>
+    /// Output a message with command list
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/list")</param>
+    /// <param name="message_id">Variable contains a message_id of bot's first message </param>
+    /// <returns>Return an operation log to console</returns>
+    public static async Task<string> ListAsync(TelegramBotClient bot, Message message, int message_id)
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_start" });
 
@@ -111,7 +131,13 @@ public static class Commands
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
 
-        public static async Task<string> FaqAsync(TelegramBotClient bot, Message message)
+    /// <summary>
+    /// Output the message with FAQ (frequently asked questions)
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/faq")</param>
+    /// <returns>Return an operation log to console</returns>
+    public static async Task<string> FaqAsync(TelegramBotClient bot, Message message)
         {
             var faq_buttons = new InlineKeyboardMarkup()
                 .AddButton("Оплата заказа", "command_payment")
@@ -135,7 +161,8 @@ public static class Commands
         /// Output the message with FAQ (frequently asked questions)
         /// </summary>
         /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
-        /// <param name="message">Variable contains message/command from user (in this method message should be "/faq")</param>
+        /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/faq")</param>
+        /// <param name="message_id">Variable contains a message_id of bot's first message </param>
         /// <returns>Return an operation log to console</returns>
         public static async Task<string> FaqAsync(TelegramBotClient bot, Message message, int message_id)
     {
@@ -159,6 +186,12 @@ public static class Commands
 
     }
 
+    /// <summary>
+    /// Output the message with FAQ category: questions about payment methods
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message is an inline button update)</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> PaymentFaqAsync(TelegramBotClient bot, Message message)
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
@@ -173,6 +206,12 @@ public static class Commands
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
 
+    /// <summary>
+    /// Output the message with FAQ category: questions about goods delivery
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message is an inline button update)</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> DeliveryFaqAsync(TelegramBotClient bot, Message message)
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
@@ -187,6 +226,12 @@ public static class Commands
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
 
+    /// <summary>
+    /// Output the message with FAQ category: questions about contact and adress of a Storge company
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="message">Variable contains a message/command/action from user (in this method message is an inline button update)</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> ContactsFaqAsync(TelegramBotClient bot, Message message)
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
@@ -200,15 +245,25 @@ public static class Commands
     }
 
     /// <summary>
-    /// Output the message with request to try again because user input an unknown message/command for programm
+    /// Output the message with request to try again because user input an unknown message/command for programm or didn't initialize a programm correctly
     /// </summary>
     /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
     /// <param name="message">Variable contains message/command from user which program cannot to define</param>
     /// <returns>Return an operation log to console</returns>
-    public static async Task<string> UnknownAsync(TelegramBotClient bot, Message message, int message_id)
+    public static async Task<string> UnknownAsync(TelegramBotClient bot, Message message, int message_id, bool first_init)
     {
-        await bot.SendMessage(message.Chat.Id, "Упс! Кажется, что-то пошло не так.\n" +
-                                            "Проверь введённые данные и попробуй ещё раз.");
+        if (first_init == true && message.Text != "/start")
+        {
+            await bot.DeleteMessage(message.Chat.Id, message.Id);
+            await bot.SendMessage(message.Chat.Id, text: "Попробуйте сначала инициализировать бота с помощью команды /start.");
+        }
+        else
+        {
+            int remainder = message.Id - message_id - 1;
+            await bot.DeleteMessage(message.Chat.Id, message.Id);
+            await bot.EditMessageText(message.Chat.Id, message.Id-remainder, text: "Упс! Кажется, что-то пошло не так.\n" + 
+                "Проверь введённые данные и попробуй ещё раз.");
+        }
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
 

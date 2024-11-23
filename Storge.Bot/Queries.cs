@@ -5,6 +5,12 @@ namespace Storge.Bot;
 
 public static class Queries
 {
+    /// <summary>
+    /// Output and entry message with inline buttons on user's request (when user press a corresponding button
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="callbackQuery">Variable contains an query of requests</param>
+    /// <returns></returns>
     public static async Task<string> CommandStartAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
     {
         await Commands.StartAsync(bot, callbackQuery.Message!);
@@ -14,7 +20,7 @@ public static class Queries
     }
 
     /// <summary>
-    /// Output a command list on user's request
+    /// Output a command list on user's request (when user press a corresponding button)
     /// </summary>
     /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
     /// <param name="callbackQuery">Variable contains an query of requests</param>
@@ -28,7 +34,7 @@ public static class Queries
     }
 
     /// <summary>
-    /// Output a module "frequently asked questions" on user's request
+    /// Output a module "frequently asked questions" on user's request (when user press a corresponding button
     /// </summary>
     /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
     /// <param name="callbackQuery">Variable contains an query of requests</param>
@@ -41,6 +47,12 @@ public static class Queries
         return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
     }
 
+    /// <summary>
+    /// Output a FAQ payment category on user's request (when user press a corresponding button)
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="callbackQuery">Variable contains an query of requests</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> CommandPaymentFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
     {
         await Commands.PaymentFaqAsync(bot, callbackQuery.Message!);
@@ -49,6 +61,12 @@ public static class Queries
         return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
     }
 
+    /// <summary>
+    /// Output a FAQ delivery category on user's request (when user press a corresponding button)
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="callbackQuery">Variable contains an query of requests</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> CommandDeliveryFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
     {
         await Commands.DeliveryFaqAsync(bot, callbackQuery.Message!);
@@ -57,6 +75,12 @@ public static class Queries
         return $"Response to query {callbackQuery.Data} from {callbackQuery.From.Id}";
     }
 
+    /// <summary>
+    /// Output a FAQ contact/adress category on user's request (when user press a corresponding button)
+    /// </summary>
+    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
+    /// <param name="callbackQuery">Variable contains an query of requests</param>
+    /// <returns>Return an operation log to console</returns>
     public static async Task<string> CommandContactsFaqAsync(TelegramBotClient bot, CallbackQuery callbackQuery)
     {
         await Commands.ContactsFaqAsync(bot, callbackQuery.Message!);

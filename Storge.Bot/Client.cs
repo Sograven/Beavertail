@@ -18,8 +18,14 @@ public static class Client
     /// </summary>
     private static readonly TelegramBotClient Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
 
+    /// <summary>
+    /// Variable contains a boolean value (true/false): Was programm initializated first time or it's continue to work
+    /// </summary>
     private static bool FirstInitialization = true;
 
+    /// <summary>
+    /// Variable contains a message.Id of first bot's message in chat
+    /// </summary>
     private static int Message_Id = 0;
 
     
@@ -82,11 +88,15 @@ public static class Client
     /// <returns></returns>
     private static async Task OnMessage(Message message, UpdateType updateType)
     {
-        if (FirstInitialization == true)
+        if (FirstInitialization == true && message.Text == "/start")
         {
             Message_Id = await Commands.FirstStartAsync(Bot, message);
             FirstInitialization = false;
             Console.WriteLine("Initialization message_id - " + Message_Id);
+        }
+        else if (FirstInitialization == true && message.Text != "/start")
+        {
+            await Commands.UnknownAsync(Bot, message, Message_Id,FirstInitialization);
         }
         else
         {
@@ -96,7 +106,7 @@ public static class Client
                 "/start" => await Commands.StartAsync(Bot, message, Message_Id),
                 "/list" => await Commands.ListAsync(Bot, message, Message_Id),
                 "/faq" => await Commands.FaqAsync(Bot, message, Message_Id),
-                _ => await Commands.UnknownAsync(Bot, message, Message_Id)
+                _ => await Commands.UnknownAsync(Bot, message, Message_Id,FirstInitialization)
 
             };
 
