@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using System.Diagnostics.Metrics;
+using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -16,6 +17,11 @@ public static class Client
     /// Variable contains a client for using the Telegram Bot API with parameters: token, cancellationToken
     /// </summary>
     private static readonly TelegramBotClient Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
+
+    private static bool FirstInitialization = true;
+
+    private static int Message_Id = 0;
+
     
     /// <summary>
     /// Entry point for the program
@@ -76,15 +82,28 @@ public static class Client
     /// <returns></returns>
     private static async Task OnMessage(Message message, UpdateType updateType)
     {
-        var response = message.Text switch
+        if (FirstInitialization == true)
         {
-            "/start" => await Commands.StartAsync(Bot, message),
-            "/list" => await Commands.ListAsync(Bot, message),
-            "/faq" => await Commands.FaqAsync(Bot, message),
-            _ => await Commands.UnknownAsync(Bot, message)
-        };
-        
-        Console.WriteLine(response);
+            Message_Id = await Commands.FirstStartAsync(Bot, message);
+            FirstInitialization = false;
+            Console.WriteLine("Initialization message_id - " + Message_Id);
+        }
+        else
+        {
+
+            var response = message.Text switch
+            {
+                "/start" => await Commands.StartAsync(Bot, message, Message_Id),
+                "/list" => await Commands.ListAsync(Bot, message, Message_Id),
+                "/faq" => await Commands.FaqAsync(Bot, message, Message_Id),
+                _ => await Commands.UnknownAsync(Bot, message, Message_Id)
+
+            };
+
+            Console.WriteLine(response);
+
+        }           
+
     }
 
     /// <summary>
