@@ -1,3 +1,5 @@
 ﻿using Storge.Bot;
+using Storge.Core;
 
-await Client.StartHandlingAsync();
+//await Client.StartHandlingAsync();
+Core.GetDb();
