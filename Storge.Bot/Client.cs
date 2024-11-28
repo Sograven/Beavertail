@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using System.Diagnostics.Metrics;
+using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -16,6 +17,17 @@ public static class Client
     /// Variable contains a client for using the Telegram Bot API with parameters: token, cancellationToken
     /// </summary>
     private static readonly TelegramBotClient Bot = new TelegramBotClient(Config.Token, cancellationToken: Cts.Token);
+
+    /// <summary>
+    /// Variable contains a boolean value (true/false): Was programm initializated first time or it's continue to work
+    /// </summary>
+    private static bool FirstInitialization = true;
+
+    /// <summary>
+    /// Variable contains a message.Id of first bot's message in chat
+    /// </summary>
+    private static int Message_Id = 0;
+
     
     /// <summary>
     /// Entry point for the program
@@ -56,8 +68,12 @@ public static class Client
     {
         var response = callbackQuery.Data switch
         {
+            "command_start" => await Queries.CommandStartAsync(Bot, callbackQuery),
             "command_list" => await Queries.CommandListAsync(Bot, callbackQuery),
             "command_faq" => await Queries.CommandFaqAsync(Bot, callbackQuery),
+            "command_payment" => await Queries.CommandPaymentFaqAsync(Bot, callbackQuery),
+            "command_delivery" => await Queries.CommandDeliveryFaqAsync(Bot, callbackQuery),
+            "command_contacts" => await Queries.CommandContactsFaqAsync(Bot, callbackQuery),
             _ => await Queries.UnknownQueryAsync(Bot, callbackQuery)
         };
         
@@ -72,15 +88,32 @@ public static class Client
     /// <returns></returns>
     private static async Task OnMessage(Message message, UpdateType updateType)
     {
-        var response = message.Text switch
+        if (FirstInitialization == true && message.Text == "/start")
         {
-            "/start" => await Commands.StartAsync(Bot, message),
-            "/list" => await Commands.ListAsync(Bot, message),
-            "/faq" => await Commands.FaqAsync(Bot, message),
-            _ => await Commands.UnknownAsync(Bot, message)
-        };
-        
-        Console.WriteLine(response);
+            Message_Id = await Commands.FirstStartAsync(Bot, message);
+            FirstInitialization = false;
+            Console.WriteLine("Initialization message_id - " + Message_Id);
+        }
+        else if (FirstInitialization == true && message.Text != "/start")
+        {
+            await Commands.UnknownAsync(Bot, message, Message_Id,FirstInitialization);
+        }
+        else
+        {
+
+            var response = message.Text switch
+            {
+                "/start" => await Commands.StartAsync(Bot, message, Message_Id),
+                "/list" => await Commands.ListAsync(Bot, message, Message_Id),
+                "/faq" => await Commands.FaqAsync(Bot, message, Message_Id),
+                _ => await Commands.UnknownAsync(Bot, message, Message_Id,FirstInitialization)
+
+            };
+
+            Console.WriteLine(response);
+
+        }           
+
     }
 
     /// <summary>
