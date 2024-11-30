@@ -1,5 +1,6 @@
 ﻿using Storge.Core.Data;
-using Storge.Core.Data.Models;
+using Storge.Core.Data.Models.User;
+using Storge.Core.Data.Contexts;
 
 namespace Storge.Core;
 
@@ -12,10 +13,10 @@ public static class Core
         db.SaveChanges();
     }
     
-    public static Account GetUser(int id)
+    public static Account GetUser(string id)
     {
         var db = new AccountContext();
 
-        return db.Accounts.Single(u => u.Id == id);
+        return db.Accounts.Single(u => u.ID == id);
     }
 }
