@@ -5,18 +5,17 @@ namespace Storge.Core;
 
 public static class Core
 {
-    public static void AddUser(User user)
+    public static void AddUser(Account user)
     {
-        var db = new UserContext();
-
-        db.Add(user);
+        var db = new AccountContext();
+        db.Accounts.Add(user);
         db.SaveChanges();
     }
     
-    public static User GetUser(int id)
+    public static Account GetUser(int id)
     {
-        var db = new UserContext();
+        var db = new AccountContext();
 
-        return db.Users.Single(u => u.Id == id);
+        return db.Accounts.Single(u => u.Id == id);
     }
 }
