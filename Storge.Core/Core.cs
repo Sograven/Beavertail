@@ -1,22 +1,11 @@
-﻿using Storge.Core.Data;
-using Storge.Core.Data.Models.User;
-using Storge.Core.Data.Contexts;
+﻿using Storge.Core.Data.Mappers;
 
 namespace Storge.Core;
 
 public static class Core
 {
-    public static void AddUser(Account user)
+    public static void Method()
     {
-        var db = new AccountContext();
-        db.Accounts.Add(user);
-        db.SaveChanges();
-    }
-    
-    public static Account GetUser(string id)
-    {
-        var db = new AccountContext();
-
-        return db.Accounts.Single(u => u.ID == id);
+        
     }
 }
