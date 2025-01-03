@@ -8,7 +8,10 @@ namespace Storge.Core.Data.Contexts;
 /// </summary>
 internal class AllUsersContext : DbContext
 {
-    internal DbSet<User> Users { get; set; }
+    /// <summary>
+    /// List of all users in the database.
+    /// </summary>
+    internal DbSet<User>? Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -22,7 +25,8 @@ internal class AllUsersContext : DbContext
             {
                 user.Property(u => u.UserID).ValueGeneratedOnAdd().IsRequired();
                 user.Property(u => u.FirstName).IsRequired();
-                user.Property(u => u.TelegramID).HasDefaultValue(-1);
+                user.Property(u => u.TelegramID).IsRequired();
+                user.HasIndex(u => u.TelegramID).IsUnique();
             });
     }
 }

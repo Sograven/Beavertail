@@ -8,20 +8,21 @@ namespace Storge.Core.Data.Models;
 internal class User
 {
     /// <summary>
-    /// Unique identifier of the user.
+    /// User's unique identifier.
     /// </summary>
     [Key]
     [Required]
     internal int UserID { get; set; }
 
     /// <summary>
-    /// First name of the user.
+    /// User's first name.
     /// </summary>
     [Required]
     internal string FirstName { get; set; }
 
     /// <summary>
-    /// Unique identifier of the user in Telegram.
+    /// User's unique identifier in the Telegram.
     /// </summary>
+    [Required]
     internal long TelegramID { get; set; }
 }
