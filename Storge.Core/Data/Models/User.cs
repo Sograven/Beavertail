@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Storge.Core.Data.Models;
 
 /// <summary>
 /// Represents user data in database.
 /// </summary>
+[Index(nameof(UserID), IsUnique = true)]
+[Index(nameof(TelegramID), IsUnique = true)]
 internal class User
 {
     /// <summary>
