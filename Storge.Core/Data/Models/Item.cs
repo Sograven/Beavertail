@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Storge.Core.Data.Models;
 
 /// <summary>
 /// Represents item data in the database.
 /// </summary>
+[Index(nameof(ID), IsUnique = true)]
 internal class Item
 {
     /// <summary>

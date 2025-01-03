@@ -28,6 +28,8 @@ internal class AllItemsContext : DbContext
                 item.Property(i => i.Color).IsRequired();
                 item.Property(i => i.Size).IsRequired();
                 item.Property(i => i.Category).IsRequired();
+
+                item.HasIndex(i => i.ID).IsUnique();
             });
     }
 }
