@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Storge.Core.Data.Models;
 
 /// <summary>
-/// Represents user data in database.
+/// Represents user data in the database.
 /// </summary>
 [Index(nameof(UserID), IsUnique = true)]
 [Index(nameof(TelegramID), IsUnique = true)]

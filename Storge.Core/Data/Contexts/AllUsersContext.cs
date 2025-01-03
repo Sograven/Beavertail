@@ -4,7 +4,7 @@ using Storge.Core.Data.Models;
 namespace Storge.Core.Data.Contexts;
 
 /// <summary>
-/// Provides access to all users in database.
+/// Provides access to all users in the database.
 /// </summary>
 internal class AllUsersContext : DbContext
 {

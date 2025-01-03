@@ -6,9 +6,14 @@
 internal static class Config
 {
     /// <summary>
-    /// Gets the path to file with users data.
+    /// Path to file with users data.
     /// </summary>
     internal static string UsersFilePath { get; } = GetFilePath("SCD_USERS", "users.db");
+
+    /// <summary>
+    /// Path to file with items data.
+    /// </summary>
+    internal static string ItemsFilePath { get; } = GetFilePath("SCD_ITEMS", "items.db");
 
     /// <summary>
     /// Retrieves a path to data file from environment variable.
