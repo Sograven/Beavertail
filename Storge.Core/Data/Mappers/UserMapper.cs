@@ -4,7 +4,7 @@ using Storge.Core.Data.Models;
 namespace Storge.Core.Data.Mappers;
 
 /// <summary>
-/// Manages user data in the database.
+/// Manages user's data in the database.
 /// </summary>
 public class UserMapper
 {
@@ -65,7 +65,7 @@ public class UserMapper
     }
 
     /// <summary>
-    /// Adds user to database and provides access to it's data.
+    /// Adds user to the database and provides access to it's data.
     /// </summary>
     /// <param name="telegramId">User's unique identifier in the Telegram.</param>
     /// <param name="firstName">User's first name.</param>
