@@ -16,6 +16,11 @@ internal static class Config
     internal static string ItemsFilePath { get; } = GetFilePath("SCD_ITEMS", "items.db");
 
     /// <summary>
+    /// Path to file with orders data.
+    /// </summary>
+    internal static string OrdersFilePath { get; } = GetFilePath("SCD_ORDERS", "orders.db");
+
+    /// <summary>
     /// Retrieves a path to data file from environment variable.
     /// </summary>
     /// <param name="variableName">Environment variable name.</param>
