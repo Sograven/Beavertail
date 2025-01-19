@@ -1,10 +1,31 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
 namespace Storge.Core.Data.Models;
 
-public class User
+/// <summary>
+/// Represents user data in the database.
+/// </summary>
+[Index(nameof(UserID), IsUnique = true)]
+[Index(nameof(TelegramID), IsUnique = true)]
+internal class User
 {
-    public required int Id { get; set; }
-    
-    public required string FirstName { get; set; }
-    public string? MiddleName { get; set; }
-    public required string LastName { get; set; }
+    /// <summary>
+    /// User's unique identifier.
+    /// </summary>
+    [Key]
+    [Required]
+    internal int UserID { get; set; }
+
+    /// <summary>
+    /// User's first name.
+    /// </summary>
+    [Required]
+    internal string FirstName { get; set; }
+
+    /// <summary>
+    /// User's unique identifier in the Telegram.
+    /// </summary>
+    [Required]
+    internal long TelegramID { get; set; }
 }
