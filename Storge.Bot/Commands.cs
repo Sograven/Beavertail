@@ -84,7 +84,7 @@ public static class Commands
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
        
-        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Q: Как оплатить заказ? \n" +
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Как оплатить заказ? \n" +
             "A: Заказ можно оплатить через банковские карты Visa, Mastercard и МИР, а также с помощью СБП. \n\n" +
             "Q: Как оформить заказ? \n" +
             "A: Заказ оформляется через сайт компании с помощью встроенного поиска и интуитивно понятного графического интерфейса. \n\n" +
@@ -104,7 +104,7 @@ public static class Commands
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
 
-        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Q: Какие пункты выдачи доступны для получения заказа? \n" +
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Какие пункты выдачи доступны для получения заказа? \n" +
             "A: Мы отправляем покупателям товары с помощью сервисов: СДЭК, Boxberry и почта России. \n\n" +
             "Q: Сколько по времени осуществляется доставка? \n" +
             "A: Средняя время доставки по России: 7-21 день в зависимости от указанного адреса доставки и выбранного сервиса. \n\n" +
@@ -124,7 +124,7 @@ public static class Commands
     {
         var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_faq" });
 
-        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Q: Каков ваш примерный график работы? \n" +
+        await bot.SendMessage(message.Chat, replyMarkup: button, text: "Q: Каков ваш примерный график работы? \n" +
             "A: Мы работаем все дни недели круглосуточно. \n\n" +
             "Q: Адрес вашей компании? \n" +
             "A: Адрес: хуево-кукуево, дом 15, квартира \"Вас ебать не должно\" \n\n");
