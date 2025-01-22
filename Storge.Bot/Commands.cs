@@ -26,7 +26,7 @@ public static class Commands
                                       "Список команд и их описание можешь узнать с помощью команды /list,\n" +
                                       "либо воспользоваться кнопками под этим сообщением.";
 
-        await bot.SendMessage(message.Chat, text, replyMarkup: buttons);
+        await bot.SendMessage(message.Chat, replyMarkup: buttons, text: text);
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
@@ -41,9 +41,7 @@ public static class Commands
         {
             var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_start" });
 
-            if (message.Text == "/list") { await bot.DeleteMessage(message.Chat, message.Id); }
-
-            await bot.EditMessageText(message.Chat, message.Id, replyMarkup: button, text: "Список команд:\n" +
+            await bot.SendMessage(message.Chat, replyMarkup: button, text: "Список команд:\n" +
                 "/start - начинает работу бота\n" +
                 "/list - показывает список команд бота\n" +
                 "/faq - выводит раздел c категориями часто задаваемых вопросов ");
