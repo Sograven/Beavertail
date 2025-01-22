@@ -65,11 +65,9 @@ public static class Commands
                 .AddNewRow()
                 .AddButton("Контакты и график работы", "command_contacts")
                 .AddNewRow()
-                .AddButton("Назад", "command_start");
+                .AddButton("Назад", "command_start");            
 
-            if (message.Text == "/faq") { await bot.DeleteMessage(message.Chat, message.Id); }
-
-            await bot.EditMessageText(message.Chat, message.Id, replyMarkup: faq_buttons, text: "Часто задаваемые вопросы\n\n" +
+            await bot.SendMessage(message.Chat, replyMarkup: faq_buttons, text: "Часто задаваемые вопросы\n\n" +
                     "Выберите категорию:");
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
