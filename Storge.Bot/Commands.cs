@@ -7,30 +7,6 @@ namespace Storge.Bot;
 
 public static class Commands
 {
-    /// <summary>
-    /// Output and entry message with inline buttons when programm is starting for the first time (obligatory procedure for user)
-    /// </summary>
-    /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
-    /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/start")</param>
-    /// <returns>Return a message.Id (Integer)</returns>
-    public static async Task<int> FirstStartAsync(TelegramBotClient bot, Message message)
-    {
-        var buttons = new InlineKeyboardMarkup(
-            new InlineKeyboardButton { Text = "Список команд", CallbackData = "command_list" },
-            new InlineKeyboardButton { Text = "Часто задаваемые вопросы", CallbackData = "command_faq" },
-            new InlineKeyboardButton { Text = "Оформить заказ", CallbackData = "command_order" });
-
-        string text = "Привет! На связи магазин Storge.\n" +
-                                      "С помощью этого бота ты можешь оформить заказ и узнать его статус.\n" +
-                                      "Список команд и их описание можешь узнать с помощью команды /list,\n" +
-                                      "либо воспользоваться кнопками под этим сообщением.";
-
-        if (message.Text == "/start") { await bot.DeleteMessage(message.Chat, message.Id); }
-        
-        await bot.SendMessage(message.Chat, replyMarkup: buttons, text: text);
-
-        return message.Id;
-    }
 
     /// <summary>
     /// Output and entry message with inline buttons when programm is starting (or user give an input message "/start")
@@ -50,9 +26,7 @@ public static class Commands
                                       "Список команд и их описание можешь узнать с помощью команды /list,\n" +
                                       "либо воспользоваться кнопками под этим сообщением.";
 
-        if (message.Text == "/start") { await bot.DeleteMessage(message.Chat, message.Id); }
-
-        await bot.EditMessageText(message.Chat, message.Id, replyMarkup: buttons, text: text);
+        await bot.SendMessage(message.Chat, text, replyMarkup: buttons);
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     }
