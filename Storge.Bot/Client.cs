@@ -85,9 +85,7 @@ public static class Client
             _ => await Commands.UnknownAsync(Bot, message)
         };
 
-            Console.WriteLine(response);
-        
-
+            Console.WriteLine(response);       
     }
 
     /// <summary>
