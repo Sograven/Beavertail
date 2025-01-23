@@ -138,7 +138,7 @@ public static class Commands
     /// <param name="bot">Variable contains a client for using the Telegram Bot API</param>
     /// <param name="message">Variable contains message/command from user which program cannot to define</param>
     /// <returns>Return an operation log to console</returns>
-    public static async Task<string> UnknownAsync(TelegramBotClient bot, Message message, int message_id, bool first_init)
+    public static async Task<string> UnknownAsync(TelegramBotClient bot, Message message)
     {
         await bot.SendMessage(message.Chat.Id, text: "Упс! Кажется, что-то пошло не так.\n" + 
                 "Проверь введённые данные и попробуй ещё раз.");
