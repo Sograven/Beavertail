@@ -38,7 +38,7 @@ public static class Commands
     /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/list")</param>
     /// <returns>Return an operation log to console</returns>
     public static async Task<string> ListAsync(TelegramBotClient bot, Message message)
-        {
+    {
             var button = new InlineKeyboardMarkup(new InlineKeyboardButton { Text = "Назад", CallbackData = "command_start" });
 
             await bot.SendMessage(message.Chat, replyMarkup: button, text: "Список команд:\n" +
@@ -48,7 +48,7 @@ public static class Commands
 
         return $"Response to message {message.Text} from {message.Chat.Id}";
     
-        }
+    }
 
     /// <summary>
     /// Output the message with FAQ (frequently asked questions)
@@ -57,7 +57,7 @@ public static class Commands
     /// <param name="message">Variable contains a message/command/action from user (in this method message should be "/faq")</param>
     /// <returns>Return an operation log to console</returns>
     public static async Task<string> FaqAsync(TelegramBotClient bot, Message message)
-        {
+    {
             var faq_buttons = new InlineKeyboardMarkup()
                 .AddButton("Оплата заказа", "command_payment")
                 .AddNewRow()
