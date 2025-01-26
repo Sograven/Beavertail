@@ -10,7 +10,7 @@ using Storge.Core.Data.Contexts;
 namespace Storge.Core.Migrations
 {
     [DbContext(typeof(AllUsersContext))]
-    [Migration("20250102193556_Initial")]
+    [Migration("20250123050046_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -18,21 +18,6 @@ namespace Storge.Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
-
-            modelBuilder.Entity("Storge.Core.Data.Models.User", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserID");
-
-                    b.ToTable("Users");
-                });
 #pragma warning restore 612, 618
         }
     }

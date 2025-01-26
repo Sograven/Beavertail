@@ -15,30 +15,6 @@ namespace Storge.Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
-
-            modelBuilder.Entity("Storge.Core.Data.Models.User", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("TelegramID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("UserID");
-
-                    b.HasIndex("TelegramID")
-                        .IsUnique();
-
-                    b.HasIndex("UserID")
-                        .IsUnique();
-
-                    b.ToTable("Users");
-                });
 #pragma warning restore 612, 618
         }
     }

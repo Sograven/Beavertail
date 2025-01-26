@@ -3,16 +3,10 @@ using Storge.Core.Data.Models;
 
 namespace Storge.Core.Data.Contexts;
 
-/// <summary>
-/// Provides access to all users in the database.
-/// </summary>
-internal class AllUsersContext : DbContext
+public class AllUsersContext : DbContext
 {
-    /// <summary>
-    /// List of all users in the database.
-    /// </summary>
-    internal DbSet<User>? Users { get; set; }
-
+   public DbSet<User> Users { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite($"Data Source = {Config.UsersFilePath}");
@@ -23,12 +17,7 @@ internal class AllUsersContext : DbContext
         modelBuilder.Entity<User>(
             user =>
             {
-                user.Property(u => u.UserID).ValueGeneratedOnAdd().IsRequired();
-                user.Property(u => u.FirstName).IsRequired();
-                user.Property(u => u.TelegramID).IsRequired();
-
-                user.HasIndex(u => u.UserID).IsUnique();
-                user.HasIndex(u => u.TelegramID).IsUnique();
+                user.Property(u => u.Id).ValueGeneratedOnAdd();
             });
     }
 }

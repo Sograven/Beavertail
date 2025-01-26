@@ -1,31 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using Storge.Core.Data.Models.Enums;
 
 namespace Storge.Core.Data.Models;
 
-/// <summary>
-/// Represents user data in the database.
-/// </summary>
-[Index(nameof(UserID), IsUnique = true)]
-[Index(nameof(TelegramID), IsUnique = true)]
-internal class User
+public class User(long telegramId, Passport passport, Address address) : Entity
 {
-    /// <summary>
-    /// User's unique identifier.
-    /// </summary>
-    [Key]
-    [Required]
-    internal int UserID { get; set; }
+    public long TelegramID { get; set; } = telegramId;
+    public Passport Passport { get; set; } = passport;
+    public Address Address { get; set; } = address;
 
-    /// <summary>
-    /// User's first name.
-    /// </summary>
-    [Required]
-    internal string FirstName { get; set; }
-
-    /// <summary>
-    /// User's unique identifier in the Telegram.
-    /// </summary>
-    [Required]
-    internal long TelegramID { get; set; }
+    public Group Group { get; set; } = Group.Customer;
 }
