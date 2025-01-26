@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Storge.Core.Data.Models;
 
 namespace Storge.Core.Data.Contexts;
@@ -6,7 +6,7 @@ namespace Storge.Core.Data.Contexts;
 public class AllUsersContext : DbContext
 {
    public DbSet<User> Users { get; set; }
-    
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite($"Data Source = {Config.UsersFilePath}");

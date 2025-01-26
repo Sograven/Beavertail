@@ -1,4 +1,4 @@
-﻿using Storge.Core.Data.Models.Enums;
+using Storge.Core.Data.Models.Enums;
 
 namespace Storge.Core.Data.Models;
 
