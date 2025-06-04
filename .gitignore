@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Beavertail project folders
+Storge.Runner/
+
 # dotenv files
 .env
 

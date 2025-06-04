@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Storge.Bot\Storge.Bot.csproj" />
-      <ProjectReference Include="..\Storge.Core\Beavertail.Data.csproj" />
+      <ProjectReference Include="..\Beavertail.Data\Beavertail.Data.csproj" />
+      <ProjectReference Include="..\Beavertail.Telegram\Beavertail.Telegram.csproj" />
     </ItemGroup>
 
 </Project>

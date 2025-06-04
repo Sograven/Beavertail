@@ -1,6 +1,3 @@
-using Beavertail.Bot;
-using Beavertail.Data.Data.Contexts;
-using Beavertail.Data.Data.Models;
-using Beavertail.Data.Data.Models.Enums;
+using Beavertail.Telegram.Bot;
 
-// await Client.StartHandlingAsync();
+await Client.StartHandlingAsync();
