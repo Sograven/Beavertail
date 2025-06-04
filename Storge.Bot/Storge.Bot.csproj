@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Storge.Core\Storge.Core.csproj" />
+      <ProjectReference Include="..\Storge.Core\Beavertail.Data.csproj" />
     </ItemGroup>
 
 </Project>

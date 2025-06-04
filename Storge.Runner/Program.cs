@@ -1,6 +1,6 @@
-using Storge.Bot;
-using Storge.Core.Data.Contexts;
-using Storge.Core.Data.Models;
-using Storge.Core.Data.Models.Enums;
+using Beavertail.Bot;
+using Beavertail.Data.Data.Contexts;
+using Beavertail.Data.Data.Models;
+using Beavertail.Data.Data.Models.Enums;
 
 // await Client.StartHandlingAsync();

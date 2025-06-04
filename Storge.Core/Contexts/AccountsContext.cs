@@ -1,11 +1,11 @@
+using Beavertail.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Storge.Core.Data.Models;
 
-namespace Storge.Core.Data.Contexts;
+namespace Beavertail.Data.Contexts;
 
-public class AllUsersContext : DbContext
+public class AccountsContext : DbContext
 {
-   public DbSet<User> Users { get; set; }
+    public DbSet<Account> Accounts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -14,10 +14,10 @@ public class AllUsersContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>(
+        modelBuilder.Entity<Account>(
             user =>
             {
-                user.Property(u => u.Id).ValueGeneratedOnAdd();
+                user.Property(u => u.ID).ValueGeneratedOnAdd();
             });
     }
 }

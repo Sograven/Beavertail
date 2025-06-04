@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Storge.Bot\Storge.Bot.csproj" />
-      <ProjectReference Include="..\Storge.Core\Storge.Core.csproj" />
+      <ProjectReference Include="..\Storge.Core\Beavertail.Data.csproj" />
     </ItemGroup>
 
 </Project>
